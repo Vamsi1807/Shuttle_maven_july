@@ -2,120 +2,201 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bulls Arena</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <style>
-	.container {
-    	display: flex; /* Enables flexbox for side-by-side layout */
-    	justify-content: space-between; /* Distributes content with space between */
-    	width: 500px; /* Optional: Set a width for the container */
-    	margin: 0 auto; /* Centers the container horizontally */
-    	margin-top: 40px; /* Add margin from the top */
-    	border:1px solid black;
-  	}
-	.body{
-		background-image:url("images/shuttle.jpeg");
-		background-position:center;
-		background-size:100% 100%;
-		background-attachment:fixed;
-	}
-
-	.trail{
-		height:210px;
-		width:300px;
-		background-color:white;
-		opacity:0.3;
-		text-align:center;
-		margin:0 auto;
-		margin-top:110px;
-		border-radius:8px;
-	}
-	.cen{
-		position: fixed;  /* Ensures centering within viewport */
-  		top: 50%;  /* Positions the top at 50% viewport height */
-  		left: 50%;  /* Positions the left at 50% viewport width */
-  		transform: translate(-50%, -50%);  /* Adjusts position for centering */
-  		display: flex;    /* Enable Flexbox for centering */
-  		/* Center elements horizontally */
-  		align-items: center;  
-  		text-align:center;
-	}
-	.button{
-		background-color: rgb(69, 183, 99);
-		border:none;
-		height:25px;
-		color:white;
-		border-radius:3px;
-	}
-	.button:hover{
-		cursor:pointer;
-		background-color: rgb(116, 192, 136);
-	}
-	.banner{
-		
-		display:flex;
-		flex-direction:column;
-	}
-	.head{
-		height:120px;
-		
-		display:flex;
-		align-items:center;
-		justify-content:center;
-		font-size:40px;
-		color:rgb(198, 228, 253);
-		text-shadow:3px 3px 15px blue;
-	}
-	.info{
-		
-		display:flex;
-		flex-direction:row;
-		justify-content:space-around;
-		font-size:20px;
-	}
-	a{
-		text-decoration:none;
-		color:black;
-	}
-	.links:hover{
-		text-decoration:underline;
-		background-color:rgb(163, 222, 169);
-		border-radius:3px;
-		width:200px
-	}
-	.fields{
-		border:none;
-		border-radius:3px;
-		box-shadow:2px 2px 4px grey;
-		height:20px;
-	}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background-image: url("images/shuttle.jpeg");
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        position: relative;
+    }
+    
+    .trail {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        min-height: 290px;
+        width: 90%;
+        max-width: 350px;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(2px);
+        text-align: center;
+        border-radius: 8px;
+        padding: 20px;
+        z-index: 0;
+    }
+    
+    .cen {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 90%;
+        max-width: 350px;
+        z-index: 1;
+    }
+    
+    .button {
+        background-color: rgb(69, 183, 99);
+        border: none;
+        height: 35px;
+        min-width: 100px;
+        color: white;
+        border-radius: 3px;
+        font-size: 16px;
+        padding: 0 15px;
+        margin-top: 10px;
+    }
+    
+    .button:hover {
+        cursor: pointer;
+        background-color: rgb(116, 192, 136);
+    }
+    
+    .banner {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .head {
+        height: auto;
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(24px, 5vw, 40px);
+        color: rgb(198, 228, 253);
+        text-shadow: 3px 3px 15px blue;
+        text-align: center;
+    }
+    
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        font-size: clamp(14px, 3vw, 20px);
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .info div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .links:hover {
+        text-decoration: underline;
+        background-color: rgb(163, 222, 169);
+        border-radius: 3px;
+        padding: 2px 5px;
+    }
+    
+    .fields {
+        border: none;
+        border-radius: 3px;
+        box-shadow: 2px 2px 4px grey;
+        height: 35px;
+        width: 100%;
+        max-width: 250px;
+        padding: 0 10px;
+        margin: 5px 0;
+        font-size: 16px;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .input-group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 250px;
+        margin: 5px 0;
+    }
+    
+    .input-group i {
+        margin-right: 10px;
+        color: #555;
+    }
+    
+    @media (min-width: 768px) {
+        .info {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .trail {
+            min-height: 300px;
+        }
+    }
 </style>
 </head>
 <body class='body'>
-	<div class="banner">
-		<div class="head"><h1>Bulls Arena</h1></div>
-		<div class="info">
-			<div>
-				<i class="fas fa-phone"></i>
-				<a href="#">Contact : 7989318424</a>
-			</div>
-			<div>
-				<i class="fas fa-envelope"></i>
-				<a href="#">Mail-id : bullsarena@gmail.com</a>
-			</div>
-		</div>
-	</div>
-	<div class='trail'></div>
-	<div class='cen'>
-    	<form method="post" action="validation.jsp">
-    		<i class="fas fa-user"></i>
-        	<input type='username' placeholder='username' name='uname' class="fields"><br><br>
-        	<i class="fas fa-lock"></i>
-        	<input type='password' placeholder='password' name='pwd' class="fields"><br><br>
-        	<input type='submit' class="button"><BR><br>
-        	<a href="forgotpassword.html" class="links">Forgot password</a><br><br>
-        	<a href="signup.html" class="links">New user? <span style="color:blue">Sign-up here...</span></a>
-    	</form><br>
-  </div>
+    <div class="banner">
+        <div class="head"><h1>Bulls Arena</h1></div>
+        <div class="info">
+            <div>
+                <i class="fas fa-phone"></i>
+                <a href="#">Contact : 7989318424</a>
+            </div>
+            <div>
+                <i class="fas fa-envelope"></i>
+                <a href="#">Mail-id : bullsarena@gmail.com</a>
+            </div>
+        </div>
+    </div>
+    <div class='trail'></div>
+    <div class='cen'>
+        <form method="post" action="validation.jsp">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type='text' placeholder='username' name='uname' class="fields" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type='password' placeholder='password' name='pwd' class="fields" required>
+            </div>
+            <input type='submit' value="Login" class="button">
+            <BR><br>
+            <a href="forgotpassword.html" class="links">Forgot password</a><br><br>
+            <a href="signup.html" class="links">New user? <span style="color:blue">Sign-up here...</span></a>
+        </form>
+    </div>
+    <script>
+    window.onload = function() {
+        alert("This is just a demo project and no where related to bulls arena.");
+        };
+    </script>
 </body>
 </html>

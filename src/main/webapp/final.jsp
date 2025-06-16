@@ -119,10 +119,14 @@
     StringBuilder id = new StringBuilder();
     Random random = new Random();
 
-    // Generate random digits (0-9)
-    for (int i = 0; i < maxLength; i++) {
-      id.append(random.nextInt(10));
+    // Generate first digit (1-9)
+    id.append(random.nextInt(9) + 1);
+
+    // Generate remaining digits (0-9)
+    for (int i = 1; i < maxLength; i++) {
+        id.append(random.nextInt(10));
     }
+
     String randomId = id.toString();
     
     

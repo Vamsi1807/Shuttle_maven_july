@@ -4,54 +4,158 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Account</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
+    * {
+        box-sizing: border-box;
         margin: 0;
-        padding: 20px;
-        background-color: #3b9b0f60;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .container {
-        max-width: 600px;
+    
+    body {
+        background-image: url("images/shuttle.jpeg");
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+    }
+    
+    .blur-container {
+        width: 90%;
+        max-width: 700px;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(8px);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        padding: 25px;
+    }
+    
+    .content-container {
+        width: 100%;
         margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(49, 52, 231, 0.74);
-        text-align:center;
     }
+    
     h1 {
         text-align: center;
-        color: #333;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
     }
-    table {
+    
+    .account-table {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .bookings-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        overflow: hidden;
+        table-layout: fixed;
     }
+    
+    .bookings-table th, 
+    .bookings-table td {
+        padding: 10px 8px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+    }
+    
+    .bookings-table th {
+        background-color: rgba(57, 155, 15, 0.5);
+        color: white;
+        padding: 10px 8px;
+    }
+    
     th, td {
-        padding: 12px;
+        padding: 12px 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
+    
     th {
-        background-color: #f2f2f2;
-    }
-    input[type="submit"] {
-        border-radius: 3px;
-        background-color: blue;
+        background-color: rgba(57, 155, 15, 0.5);
         color: white;
-        padding: 10px 20px;
+        width: 30%;
+    }
+    
+    td {
+        width: 70%;
+    }
+    
+    tr:hover {
+        background-color: rgba(242, 242, 242, 0.7);
+    }
+    
+    .btn {
+        border-radius: 5px;
+        background-color: #3f8ffd;
+        color: white;
+        padding: 12px 25px;
         border: none;
         cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin: 20px auto 0;
+        display: block;
+        max-width: 200px;
     }
-    input[type="submit"]:hover {
-        background-color: darkblue;
+    
+    .btn:hover {
+        background-color: #2c7be5;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-    img.logo {
-        max-width: 100px;
-        margin-bottom: 20px;
+    
+    .no-bookings {
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        margin: 20px 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    @media (max-width: 768px) {
+        .blur-container {
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+        }
+        
+        th, td {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .account-table, .bookings-table {
+            display: block;
+            overflow-x: auto;
+        }
     }
 </style>
 </head>
@@ -72,9 +176,8 @@
         ResultSet rs = null;
 
         try {
-        	
-        	Demo d1 = new Demo();
-    		conn=d1.returnConn();
+            Demo d1 = new Demo();
+            conn = d1.returnConn();
 
             String query = "SELECT email, dob FROM userdetails WHERE uname = ?";
             pstmt = conn.prepareStatement(query);
@@ -99,86 +202,84 @@
             }
         }
     %>
-    <div class="container">
-        <img src="images/logo.jpeg" class="logo" alt="Logo">
-        <h1>My Account</h1>
-        <table>
-            <tr>
-                <th>Username</th>
-                <td><%= uname %></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td><%= email %></td>
-            </tr>
-            <tr>
-                <th>Date Of Birth</th>
-                <td><%= dob %></td>
-            </tr>
-        </table><br>
-       
+    
+    <div class="blur-container">
+        <div class="content-container">
+            <h1>My Account</h1>
+            <table class="account-table">
+                <tr>
+                    <th>Username</th>
+                    <td><%= uname %></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><%= email %></td>
+                </tr>
+                <tr>
+                    <th>Date Of Birth</th>
+                    <td><%= dob %></td>
+                </tr>
+            </table>
 
+            <h1>Previous Bookings</h1>
+            <%
+                Connection conn1 = null;
+                PreparedStatement pstmt1 = null;
+                ResultSet rs1 = null;
+                boolean hasBookings = false;
 
-        <h1>Previous Bookings</h1>
-<table>
-    <%
-        Connection conn1 = null;
-        PreparedStatement pstmt1 = null;
-        ResultSet rs1 = null;
+                try {
+                    Demo d1 = new Demo();
+                    conn1 = d1.returnConn();
 
-        try {
-            Demo d1 = new Demo();
-            conn1 = d1.returnConn(); // Correctly assign conn1
+                    String q2 = "SELECT date1 AS day, play AS time, court, booking_id AS Id FROM courts WHERE username = ? ORDER BY day DESC";
+                    pstmt1 = conn1.prepareStatement(q2);
+                    pstmt1.setString(1, uname);
+                    rs1 = pstmt1.executeQuery();
 
-            String q2 = "SELECT date1 AS day, play AS time, court, booking_id AS Id FROM courts WHERE username = ? ORDER BY day DESC";
-            pstmt1 = conn1.prepareStatement(q2);
-            pstmt1.setString(1, uname); // Set the username parameter
-            rs1 = pstmt1.executeQuery();
+                    ResultSetMetaData rsmd = rs1.getMetaData();
+                    int columnCount = rsmd.getColumnCount();
+                    
+                    out.print("<table class='bookings-table'>");
+                    out.print("<tr>");
+                    for (int i = 1; i <= columnCount; i++) {
+                        out.print("<th>" + rsmd.getColumnName(i) + "</th>");
+                    }
+                    out.print("</tr>");
 
-            ResultSetMetaData rsmd = rs1.getMetaData();
-            int columnCount = rsmd.getColumnCount();
+                    while (rs1.next()) {
+                        hasBookings = true;
+                        out.print("<tr>");
+                        for (int i = 1; i <= columnCount; i++) {
+                            String value = rs1.getString(i);
+                            out.print("<td>" + value + "</td>");
+                        }
+                        out.print("</tr>");
+                    }
+                    
+                    if (!hasBookings) {
+                        out.print("<tr><td colspan='" + columnCount + "'>No bookings found</td></tr>");
+                    }
+                    
+                    out.print("</table>");
 
-            // Print table headers
-            out.print("<tr>");
-            for (int i = 1; i <= columnCount; i++) {
-                out.print("<th>" + rsmd.getColumnName(i) + "</th>");
-            }
-            out.print("</tr>");
-
-            // Print table rows
-            boolean hasRows = false;
-            while (rs1.next()) {
-                hasRows = true;
-                out.print("<tr>");
-                for (int i = 1; i <= columnCount; i++) {
-                    String value = rs1.getString(i);
-                    out.print("<td>" + value + "</td>");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (rs1 != null) rs1.close();
+                        if (pstmt1 != null) pstmt1.close();
+                        if (conn1 != null) conn1.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
-                out.print("</tr>");
-            }
-
-            // Fallback if no rows are returned
-            if (!hasRows) {
-                out.print("<tr><td colspan='" + columnCount + "'>No bookings found</td></tr>");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs1 != null) rs1.close();
-                if (pstmt1 != null) pstmt1.close();
-                if (conn1 != null) conn1.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    %>
-</table>
-<br>
-        <form method="post" action="booking.jsp">
-            <input type="submit" value="HOME">
-        </form>
+            %>
+            
+            <form method="post" action="booking.jsp">
+                <input type="submit" value="HOME" class="btn">
+            </form>
+        </div>
     </div>
 </body>
 </html>

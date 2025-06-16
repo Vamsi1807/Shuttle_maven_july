@@ -24,6 +24,7 @@
     .confirm:hover{
         background-color:red;
     }
+    
     .navbar {
         height: 100px;
         color: white;
@@ -34,6 +35,7 @@
         align-items: center;
     }
     .nav {
+    	margin : 0px;
         width:200px;
         height: 20px;
         padding: 5px;
@@ -182,6 +184,20 @@
 
     .dropdown:hover .dropdown-content {
           display: block;
+    }
+    
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #333;
+        color: white;
+        font-size: 0.9rem;
+    }
+    
+    .footer p {
+        margin: 5px 0;
+        font-size: 14px;
     }
 </style>
 </head>
@@ -403,4 +419,8 @@
         document.getElementById("finalTime").value = this.value;
     });
 </script>
+<div class="footer">
+    <p>This is just a demo project and no where related to bulls arena.</p>
+    <p>&copy; 2024 Badminton Court Booking System. All rights reserved.</p>
+</div>
 </html>

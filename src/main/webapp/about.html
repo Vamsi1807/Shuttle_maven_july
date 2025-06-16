@@ -1,175 +1,312 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badminton Court Booking</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            height: auto;
+            min-height: 80px;
+            color: white;
+            background-color: #28bb28;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            background-color: #5782f0;
+            border-radius: 5px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .nav:hover {
+            cursor: pointer;
+            background-color: #777;
+            transform: translateY(-2px);
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            display: block;
+        }
+
+        .navele {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .content-section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #28bb28;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .booking {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .book {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time {
+            color: white;
+            background-color: #5782f0;
+            border: none;
+            border-radius: 5px;
+            height: 40px;
+            padding: 0 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time:hover {
+            background-color: #3a6bd8;
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            background-color: white;
+            border-radius: 3px;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        .timeslots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .hrs {
+            color: white;
+            background-color: #668a42;
+            height: 40px;
+            border-radius: 5px;
+            padding: 0 15px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .opt {
+            background-color: #50a1a1;
+        }
+
+        .opt:hover {
+            background-color: #668a42;
+        }
+
+        .duration, .start {
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check {
+            border: none;
+            border-radius: 5px;
+            background-color: #90ee90;
+            height: 40px;
+            padding: 0 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .check:hover {
+            background-color: #76d176;
+        }
+
+        button[type="submit"] {
+            background-color: #28bb28;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1fa01f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0 30px;
+                height: 100px;
+            }
+
+            .navele {
+                justify-content: flex-end;
+                width: auto;
+            }
+
+            .nav {
+                margin: 0 5px;
+                flex-grow: 0;
+            }
+
+            .content-section {
+                padding: 30px;
+            }
+
+            .timeslots {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
 </head>
-<style>
-  	.navbar{
-		height:100px;
-		color:white;
-		background-color:rgb(40, 187, 40);
-		display:flex;
-		flex-direction:row;
-		justify-content:space-between;
-		align-items:center;
-	}
-	.nav{
-		border:1px solid black;
-		height:20px;
-		padding:5px;
-		background-color:rgb(87, 130, 240);
-		border-radius:3px;
-		margin-left:5px;
-	}
-	.nav:hover{
-		cursor:pointer;
-		background-color:grey;
-	}
-	.nav a{
-		text-decoration:none;
-		color:white;
-	}
-	.navele{
-		width:340px;
-		display:flex;
-		justify-content:space-around;
-	}
-	p{
-		font-size:20px;
-		font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	}
-	.booking{
-		
-		border:1px solid black;
-		display:flex;
-		flex-direction:column;;
-	}
-	.book{
-		border:1px solid black;
-        text-align: center;
-	}
-	.time{
-		color:white;
-		background-color:blue;
-		border:none;
-		border-radius:4px;
-		height:30px;
-		padding:0px 5px 0px 5px;
-		font-size:15px;
-	}
-	::-webkit-calendar-picker-indicator{
-		background-color:white;
-		border-radius:3px;
-		padding:4px;
-		cursor:pointer;
-	}
-	.time:hover{
-		cursor:pointer;
-	}
-	.start{
-        border:1px solid black;
-    }
-
-    .timeslots{
-        text-align:end;
-        display: grid;
-        grid-template-columns: repeat(4,160px);
-        grid-template-rows: repeat(3,45px);
-        
-    }
-
-    .hrs{
-        color:white;
-        background-color: rgb(102, 138, 66);
-        height:30px;
-        border-radius:3px;
-        padding:5px;
-    }
-
-    .opt{
-        background-color: rgb(80, 161, 161);
-        cursor:pointer;
-    }
-    .opt:hover{
-        background-color:  rgb(102, 138, 66);
-    }
-    .duration{
-        text-align: center;
-        font-size:20px;
-    }
-    .start{
-        text-align: center;
-    }
-    .check{
-        border:none;
-        border-radius:5px;
-        background-color:lightgreen;
-        height:22px;
-    }
-
-</style>
-<body style="background-color:silver">
-  <div class="navbar">
-    <div class="nav">
-      <a href="#aboutus">About Us</a>
-    </div>
-    <div class="navele">
-      <div class="nav">
-        <a href="#location">Location</a>
-      </div>
-      <div class="nav">
-        <a href="#booking">Booking</a>
-      </div>
-      <div class="nav">Contact Us</div>
-      <div class="nav">Account</div>
-    </div>
-  </div>
-  <div class="aboutus" id="aboutus">
-    <h1>About us :</h1>
-    <p>Looking to unleash your inner badminton champion? Look no further! Our courts are renowned as some of the finest in town, offering a haven for players of all skill levels. Dominate the competition on our top-tier, synthetic surfaces designed for lightning-fast rallies. Unleash powerful smashes under professional-grade lighting that illuminates every corner of the court. We take pride in maintaining spacious, well-maintained courts, ensuring a comfortable and enjoyable experience for every game.  So, don't settle for average. Book your court today and experience the thrill of badminton at its finest!</p>
-  </div>
-  <div class="booking" id="booking">
-    <h1>Booking : </h1>
-    <form method="post" action="booking.jsp"> 
-        <div class="book">
-            <label for="date">Select date : </label>
-            <input type="date" name="date" class="time" min="<?php echo date('Y-m-d'); ?>">
-            <input type="submit" value="Check Availability" class="check">
-        </div><br>
-        <div class="start">
-            <label for="times">Select time : </label>
-            <select class="hrs" name="times" value="null">
-                <option value="">null</option>
-                <option value="08:00 AM" class="opt" id="opt1" >08:00 AM</option>
-                <option value="09:00 AM" class="opt" id="opt2">09:00 AM</option>
-                <option value="10:00 AM" class="opt" id="opt3">10:00 AM</option>
-                <option value="11:00 AM" class="opt" id="opt4">11:00 AM</option>
-                <option value="01:00 PM" class="opt" id="opt5">01:00 PM</option>
-                <option value="02:00 PM" class="opt" id="opt6">02:00 PM</option>
-                <option value="03:00 PM" class="opt" id="opt7">03:00 PM</option>
-                <option value="04:00 PM" class="opt" id="opt8">04:00 PM</option>
-                <option value="06:00 PM" class="opt" id="opt9">06:00 PM</option>
-                <option value="07:00 PM" class="opt" id="opt10">07:00 PM</option>
-                <option value="08:00 PM" class="opt" id="opt11">08:00 PM</option>
-                <option value="09:00 PM" class="opt" id="opt12">09:00 PM</option>
-            </select>
-        </div><br>
-        <div class="duration">
-            <label for="hrs">Duration : </label>
-            <select name="hrs" class="hrs">
-                <option value="0" class="opt">0 Hr</option>
-                <option value="1" class="opt">1 Hr</option>
-                <option value="2" class="opt">2 Hrs</option>
-                <option value="3" class="opt">3 Hrs</option>
-                <option value="4" class="opt">4 Hrs</option>
-            </select>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="nav">
+                <a href="#aboutus">About Us</a>
+            </div>
+            <div class="navele">
+                <div class="nav">
+                    <a href="#location">Location</a>
+                </div>
+                <div class="nav">
+                    <a href="#booking">Booking</a>
+                </div>
+                <div class="nav">
+                    <a href="#contact">Contact Us</a>
+                </div>
+                <div class="nav">
+                    <a href="#account">Account</a>
+                </div>
+            </div>
         </div>
-        <div class="courts">
-            <label>Available courts : </label>
+    </div>
+
+    <div class="content-section">
+        <div class="aboutus" id="aboutus">
+            <h1>About Us</h1>
+            <p>Looking to unleash your inner badminton champion? Look no further! Our courts are renowned as some of the finest in town, offering a haven for players of all skill levels. Dominate the competition on our top-tier, synthetic surfaces designed for lightning-fast rallies. Unleash powerful smashes under professional-grade lighting that illuminates every corner of the court. We take pride in maintaining spacious, well-maintained courts, ensuring a comfortable and enjoyable experience for every game. So, don't settle for average. Book your court today and experience the thrill of badminton at its finest!</p>
         </div>
-    <button type="submit">Book Court</button>  
-    </form>
-  </div>
+
+        <div class="booking" id="booking">
+            <h1>Booking</h1>
+            <form method="post" action="booking.jsp"> 
+                <div class="book">
+                    <label for="date">Select date:</label>
+                    <input type="date" name="date" class="time" min="<?php echo date('Y-m-d'); ?>">
+                    <input type="submit" value="Check Availability" class="check">
+                </div>
+
+                <div class="start">
+                    <label for="times">Select time:</label>
+                    <select class="hrs" name="times">
+                        <option value="">-- Select Time --</option>
+                        <option value="08:00 AM" class="opt">08:00 AM</option>
+                        <option value="09:00 AM" class="opt">09:00 AM</option>
+                        <option value="10:00 AM" class="opt">10:00 AM</option>
+                        <option value="11:00 AM" class="opt">11:00 AM</option>
+                        <option value="01:00 PM" class="opt">01:00 PM</option>
+                        <option value="02:00 PM" class="opt">02:00 PM</option>
+                        <option value="03:00 PM" class="opt">03:00 PM</option>
+                        <option value="04:00 PM" class="opt">04:00 PM</option>
+                        <option value="06:00 PM" class="opt">06:00 PM</option>
+                        <option value="07:00 PM" class="opt">07:00 PM</option>
+                        <option value="08:00 PM" class="opt">08:00 PM</option>
+                        <option value="09:00 PM" class="opt">09:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="duration">
+                    <label for="hrs">Duration:</label>
+                    <select name="hrs" class="hrs">
+                        <option value="0">-- Select Duration --</option>
+                        <option value="1">1 Hour</option>
+                        <option value="2">2 Hours</option>
+                        <option value="3">3 Hours</option>
+                        <option value="4">4 Hours</option>
+                    </select>
+                </div>
+
+                <div class="courts">
+                    <label>Available courts will appear here after selecting date and time</label>
+                </div>
+
+                <button type="submit">Book Court</button>  
+            </form>
+        </div>
+    </div>
 </body>
 </html>
