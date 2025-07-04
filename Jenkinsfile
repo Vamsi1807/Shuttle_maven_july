@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080')], contextPath: '/Shuttle_maven_July', war: 'target/ShuttleDemo-0.0.1-SNAPSHOT.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080')], contextPath: '/Shuttle_maven_July', war: 'target/ShuttleJuly4.war'
             }
         }
     }
