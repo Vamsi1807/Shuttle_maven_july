@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'vamsiG', url: 'https://github.com/Vamsi1807/Shuttle_Webproject.git'
+                git branch: 'main', credentialsId: 'vamsiG', url: 'https://github.com/Vamsi1807/Shuttle_maven_july'
             }
         }
         stage('Build') {
