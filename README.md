@@ -1,4 +1,4 @@
-# 🚀 Shuttle Maven July
+# 🚀 Shuttle Court Management System
 
 Welcome to **Shuttle Maven July** – a web-based application for booking shuttle courts!  
 This project demonstrates a full-stack Java web application featuring user authentication, booking management, and a stylish, responsive UI.
